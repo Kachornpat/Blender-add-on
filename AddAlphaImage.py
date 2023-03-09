@@ -29,12 +29,14 @@ class AlphaImagePanel(bpy.types.Panel):
         row = layout.row()
         row.operator('shader.add_alpha_operator', text="Add Alpha Image", icon="IMAGE")
 
+
 class ALPHA_IMAGE(bpy.types.Operator):
-    bl_label = "Alpha Texture"
+    bl_label = "Create Alpha Image"
     bl_idname = "shader.add_alpha_operator"
     
-    img_name = bpy.props.StringProperty(name="", default="Untitled")
-    width = bpy.props.IntProperty(name="", default=4096)
+    name: bpy.props.StringProperty(name="Name", default="")
+    width: bpy.props.IntProperty(name="Width", default=4096)
+    height: bpy.props.IntProperty(name="Height", default=2560)
     
     
     def execute(self, context):
@@ -49,10 +51,10 @@ class ALPHA_IMAGE(bpy.types.Operator):
         
         cur_material.node_tree.links.new(texImage.outputs[0], active_node.inputs[0])
         
-        alpha_image = bpy.data.images.new(name="4K_Alpha_image", alpha=True, width=4096, height=2560)
+        alpha_image = bpy.data.images.new(name=self.name, alpha=True, width=self.width, height=self.height)
         texImage.image = alpha_image
         
-#        cur_material.node_tree.nodes.active = texImage
+        cur_material.node_tree.nodes.active = texImage
     
         return {"FINISHED"}
     
