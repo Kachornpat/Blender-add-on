@@ -5,8 +5,8 @@ bl_info = {
     "blender": (3, 4, 1),
     "location": "Shader > Tool",
     "warning": "",
-    "wiki_url": "",
-    "category": "Add Image"
+    "wiki_url": "https://github.com/Kachornpat/Blender-add-on.git",
+    "category": "Material"
 }
 
 
@@ -19,7 +19,7 @@ class AlphaImagePanel(bpy.types.Panel):
     bl_idname = "AlphaImage"
     bl_space_type = 'NODE_EDITOR'
     bl_region_type = 'UI'
-    bl_category = "Alpha"
+    bl_category = "Tool"
 
     def draw(self, context):
         layout = self.layout
@@ -34,19 +34,22 @@ class ALPHA_IMAGE(bpy.types.Operator):
     bl_label = "Create Alpha Image"
     bl_idname = "shader.add_alpha_operator"
     
-    name: bpy.props.StringProperty(name="Name", default="")
+    name: bpy.props.StringProperty(name="Name", default="ImageTexture")
     width: bpy.props.IntProperty(name="Width", default=4096)
     height: bpy.props.IntProperty(name="Height", default=2560)
     
     
     def execute(self, context):
         
-        cur_material = bpy.data.materials[1]
+        cur_material = bpy.context.active_object.active_material
         cur_material.use_nodes = True
         
         active_node = cur_material.node_tree.nodes.active
+
+        if active_node is None:
+            active_node = cur_material.node_tree.nodes[-1]
         
-        texImage = bpy.data.materials[1].node_tree.nodes.new(type="ShaderNodeTexImage")
+        texImage = cur_material.node_tree.nodes.new(type="ShaderNodeTexImage")
         texImage.location = (active_node.location.x-300, active_node.location.y)
         
         cur_material.node_tree.links.new(texImage.outputs[0], active_node.inputs[0])
