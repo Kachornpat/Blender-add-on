@@ -6,7 +6,7 @@ bl_info = {
     "location": "Shader > Tool",
     "warning": "",
     "wiki_url": "https://github.com/Kachornpat/Blender-add-on.git",
-    "category": "Material"
+    "category": "Material",
 }
 
 
