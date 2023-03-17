@@ -1,12 +1,13 @@
 bl_info = {
-    "name": "Add Alpha Image Texture",
+    "name": "Alpha Image",
     "author": "Kachornpat G.",
     "version": (1, 0),
     "blender": (3, 4, 1),
     "location": "Shader > Tool",
+    "description": "Add Alpha Image Texture",
     "warning": "",
-    "wiki_url": "https://github.com/Kachornpat/Blender-add-on.git",
-    "category": "Material"
+    "doc_url": "https://github.com/Kachornpat/Blender-add-on.git",
+    "category": "Material",
 }
 
 
