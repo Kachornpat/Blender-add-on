@@ -53,7 +53,7 @@ class ALPHA_IMAGE(bpy.types.Operator):
         texImage = cur_material.node_tree.nodes.new(type="ShaderNodeTexImage")
         texImage.location = (active_node.location.x-300, active_node.location.y)
         
-        cur_material.node_tree.links.new(texImage.outputs[0], active_node.inputs[0])
+        cur_material.node_tree.links.new(texImage.outputs[0], active_node.inputs["Color"])
         
         alpha_image = bpy.data.images.new(name=self.name, alpha=True, width=self.width, height=self.height)
         texImage.image = alpha_image
