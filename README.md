@@ -13,3 +13,8 @@ How to install:
 5. Go to the directory that you download the repository and choose AddAlphaImage.py
 6. Click install add-on
 7. Go to Shade Editor > tool bar
+
+
+Notice:
+blender 3.3.x use AddAlphaImage_33.py
+blender 3.4.x use AddAlphaImage_34.py
