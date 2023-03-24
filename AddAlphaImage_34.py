@@ -50,7 +50,7 @@ class ALPHA_IMAGE(bpy.types.Operator):
         if self.resolution_2 == "OP1":
             self.width_2 = 4096
             self.height_2 = 4096
-        elif self.resolution == "OP2":
+        elif self.resolution_2 == "OP2":
             self.width_2 = 2048
             self.height_2 = 2048
         elif self.resolution_2 == "OP3":
@@ -134,10 +134,6 @@ class ALPHA_IMAGE(bpy.types.Operator):
             
             cur_material.node_tree.links.new(texImage_2.outputs[0], mix.inputs[7])
             
-            self.name = ""
-        
-
-#        cur_material.node_tree.nodes.active = texImage
 
     
         return {"FINISHED"}
