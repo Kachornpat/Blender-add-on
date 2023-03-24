@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Alpha Image",
     "author": "Kachornpat G.",
-    "version": (1, 0),
-    "blender": (3, 4, 1),
+    "version": (1, 1),
+    "blender": (3, 3, 0),
     "location": "Shader > Tool",
     "description": "Add Alpha Image Texture",
     "warning": "",
@@ -104,13 +104,12 @@ class ALPHA_IMAGE(bpy.types.Operator):
             texImage = cur_material.node_tree.nodes.new(type="ShaderNodeTexImage")
             texImage.location = (active_node.location.x-600, active_node.location.y)
             
-            mix = cur_material.node_tree.nodes.new(type="ShaderNodeMix")
-            mix.data_type = "RGBA"
+            mix = cur_material.node_tree.nodes.new(type="ShaderNodeMixRGB")
             mix.location = (active_node.location.x-250, active_node.location.y)
             
                  
             cur_material.node_tree.links.new(mix.outputs[2], active_node.inputs[0])
-            cur_material.node_tree.links.new(texImage.outputs[0], mix.inputs[6])
+            cur_material.node_tree.links.new(texImage.outputs[0], mix.inputs[1])
             
             
             bpy.ops.image.new(name=self.name, 
@@ -132,11 +131,13 @@ class ALPHA_IMAGE(bpy.types.Operator):
             alpha_image_2 = bpy.data.images.get(self.name_2)
             texImage_2.image = alpha_image_2
             
-            cur_material.node_tree.links.new(texImage_2.outputs[0], mix.inputs[7])
+            cur_material.node_tree.links.new(texImage_2.outputs[0], mix.inputs[2])
             
             self.name = ""
         
+
 #        cur_material.node_tree.nodes.active = texImage
+
     
         return {"FINISHED"}
     
