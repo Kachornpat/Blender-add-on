@@ -1,4 +1,4 @@
-#import maya.cmds as cmds
+import maya.cmds as cmds
 import maya.api.OpenMaya as om
 import json
 import pathlib
@@ -24,32 +24,9 @@ for f in face_list:
         polygonConnects.append(index)
 
 meshFn.create(vertices, polygonFaces, polygonConnects )
-
+name = cmds.ls("*polySurface*")
+cmds.rename(name[-1], data["object_name"]) 
 print("Finish")
-
-#index = 0
-#size = len(point)
-#face_vertice = []
-#for vertice in face_list[0]:
-#    face_vertice.append(tuple(point[vertice]))
-#    point[vertice] = index
-#    index += 1
-#cmds.polyCreateFacet( p=face_vertice )
-
-
-#for face in face_list:
-#    face_vertice = []
-#    for vertice in face:
-#        face_vertice.append(point[vertice])
-#        if type(point[vertice]) is list:
-#            point[vertice] = index
-#            index += 1
-#            print(f"{index}/{size} vertices")
-#    cmds.polyAppendVertex( a=face_vertice )
-    
-#cmds.rotate( '-90deg', 0, 0, r=True )
-
-#print("Finish")
 
 
 
